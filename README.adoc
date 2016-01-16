@@ -3,7 +3,7 @@ ivsort.py
 
 a simple script to sort Hebrew words with vowels and accents according
 to their lexical order (which differs from the unicode point order or
-even the local's collation string)
+even the locale's collation string)
 
 From the docstring:
 _________
