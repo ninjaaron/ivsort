@@ -21,7 +21,8 @@ This order may seem foreign to those accustomed to Latin-based
 languages, but it was recommended to me by the Academy for the Hebrew
 Language in Israel, and it is very similar to orders use by Unicode and
 standard Israeli keyboard layouts. It is also more "scientific" in the
-sense that it follows a phonological pattern
+sense that it follows a phonological pattern (horizontal to vertical
+vowels), rather than a traditional, Latin-based pattern (aeiou).
 
 This does differ from the one convention common in Israeli works, in
 that it treats Sin as a separate letter from Shin. This is not
