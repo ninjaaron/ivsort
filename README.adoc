@@ -55,7 +55,7 @@ matter). It is basically how `sort` works.
 ----
 from ivsort import ivsort
 
-sorted_list = ivsort(unsorted_list)
+sorted_list = ivsort(unsorted_iterable)
 ----
 
 You probably aren't going to want to muck around with the other
