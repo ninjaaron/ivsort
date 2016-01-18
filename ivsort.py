@@ -38,14 +38,14 @@ order['־'] = order[' ']
 vowels = 'םְםֱםֲםֳםִםֵםֶםַםָםֹםֺוֹםֻוּ'.replace('ם', '')
 order2 = order.copy()
 order2.update({c: 100 + i for i, c in enumerate(vowels)})
-vowels = set(vowels)
+vowels = set(vowels + '\u05BC')
 trickyvavs = [(u'\u05B9ו', 'וֹ'), (u'ו\u05B9', 'וֹ'), (u'ו\u05BC', 'וּ')]
 
 
 def sortkey(word: str) -> tuple:
     """
     Returns a key based on consonantes only first, and then consonants and
-    vowels together
+    vowels together.
     """
     word = substitutions(word)
     key1, key2 = [], []
@@ -59,8 +59,8 @@ def sortkey(word: str) -> tuple:
 
 def substitutions(word):
     """
-    return a word that makes sure all characters special to the sort key are
-    recognized
+    Return a word that makes sure all characters special to the sort key are
+    recognized.
     """
     word = ud.normalize('NFD', word)
     word = word.replace('ש\u05C2', 'שׂ')
@@ -87,7 +87,7 @@ def trickyvav_replacer(word: str, nfd: str, nfc: str) -> str:
 
 
 def ivsort(wordlist: iter) -> list:
-    """sort your dang list of hebrew words"""
+    """Sort your dang list of hebrew words."""
     return sorted(wordlist, key=sortkey)
 
 
