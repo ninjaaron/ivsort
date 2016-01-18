@@ -38,7 +38,9 @@ order['־'] = order[' ']
 vowels = 'םְםֱםֲםֳםִםֵםֶםַםָםֹםֺוֹםֻוּ'.replace('ם', '')
 order2 = order.copy()
 order2.update({c: 100 + i for i, c in enumerate(vowels)})
-vowels = set(vowels + '\u05BC')
+vowels = set(vowels)
+vowdag = vowels.copy()
+vowdag.add('\u05BC')
 trickyvavs = [(u'\u05B9ו', 'וֹ'), (u'ו\u05B9', 'וֹ'), (u'ו\u05BC', 'וּ')]
 
 
@@ -78,7 +80,7 @@ def trickyvav_replacer(word: str, nfd: str, nfc: str) -> str:
     check = word.find(nfd)
     i = check
     while check != -1:
-        if not (word[i+2:i+1] in vowels or word[i-1:i] in vowels):
+        if not (word[i+2:i+1] in vowdag or word[i-1:i] in vowels):
             word = word.replace(nfd, nfc, 1)
         start = i + 1
         check = word[start:].find(nfd)
