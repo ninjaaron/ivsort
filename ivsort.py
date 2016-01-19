@@ -30,6 +30,7 @@ modern Hebrew.
 """
 
 import unicodedata as ud
+import re
 # If you are looking at this that some text editors "fix" the display of
 # characters for RTL languages, so some of this may be reversed for your
 # viewing pleasure.
@@ -42,6 +43,7 @@ vowels = set(vowels)
 vowdag = vowels.copy()
 vowdag.add('\u05BC')
 trickyvavs = [(u'\u05B9ו', 'וֹ'), (u'ו\u05B9', 'וֹ'), (u'ו\u05BC', 'וּ')]
+matchsin = re.compile('ש([%s]{0,2})\u05C2' % ''.join(vowdag))
 
 
 def sortkey(word: str) -> tuple:
@@ -65,8 +67,7 @@ def substitutions(word):
     recognized.
     """
     word = ud.normalize('NFD', word)
-    word = word.replace('ש\u05C2', 'שׂ')
-    word = word.replace('ש\u05BC\u05C2', 'שׂ')
+    word = matchsin.sub('שׂ\1', word)
     for nfd, nfc in trickyvavs:
         word = trickyvav_replacer(word, nfd, nfc)
     return word
