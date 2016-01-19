@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# coding=UTF-8
 """
 Module for properly sorting Hebrew words with niqqud -- according to consonants
 first and vowels later. If run from the command line, takes a file with a list
@@ -28,7 +29,7 @@ accurate from the perspective of historical linguistics.
 I would probably revise this approach if this sort engine were targeted at
 modern Hebrew.
 """
-
+from __future__ import unicode_literals
 import unicodedata as ud
 import re
 # If you are looking at this that some text editors "fix" the display of
@@ -46,7 +47,7 @@ trickyvavs = [(u'\u05B9ו', 'וֹ'), (u'ו\u05B9', 'וֹ'), (u'ו\u05BC', 'וּ')]
 matchsin = re.compile(u'ש([%s]{0,2})\u05C2' % ''.join(vowdag))
 
 
-def sortkey(word: str) -> tuple:
+def sortkey(word):
     """
     Returns a key based on consonantes only first, and then consonants and
     vowels together.
@@ -73,7 +74,7 @@ def substitutions(word):
     return word
 
 
-def trickyvav_replacer(word: str, nfd: str, nfc: str) -> str:
+def trickyvav_replacer(word, nfd, nfc):
     """
     Certain vavs make it difficult to tell if they are consonants or vowels,
     This function makes sure.
@@ -89,7 +90,7 @@ def trickyvav_replacer(word: str, nfd: str, nfc: str) -> str:
     return word
 
 
-def ivsort(wordlist: iter) -> list:
+def ivsort(wordlist):
     """Sort your dang list of hebrew words."""
     return sorted(wordlist, key=sortkey)
 
