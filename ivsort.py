@@ -43,7 +43,7 @@ vowels = set(vowels)
 vowdag = vowels.copy()
 vowdag.add('\u05BC')
 trickyvavs = [(u'\u05B9ו', 'וֹ'), (u'ו\u05B9', 'וֹ'), (u'ו\u05BC', 'וּ')]
-matchsin = re.compile('ש([%s]{0,2})\u05C2' % ''.join(vowdag))
+matchsin = re.compile(u'ש([%s]{0,2})\u05C2' % ''.join(vowdag))
 
 
 def sortkey(word: str) -> tuple:
@@ -67,7 +67,7 @@ def substitutions(word):
     recognized.
     """
     word = ud.normalize('NFD', word)
-    word = matchsin.sub('שׂ\1', word)
+    word = matchsin.sub(u'שׂ\1', word)
     for nfd, nfc in trickyvavs:
         word = trickyvav_replacer(word, nfd, nfc)
     return word
