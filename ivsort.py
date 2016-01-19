@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # coding=UTF-8
 """
 Module for properly sorting Hebrew words with niqqud -- according to consonants
