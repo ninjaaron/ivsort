@@ -30,6 +30,7 @@ I would probably revise this approach if this sort engine were targeted at
 modern Hebrew.
 """
 from __future__ import unicode_literals
+import six
 import unicodedata as ud
 import re
 # If you are looking at this that some text editors "fix" the display of
@@ -49,7 +50,7 @@ matchsin = re.compile(u'ש([%s]{0,2})\u05C2' % ''.join(vowdag))
 
 def sortkey(word):
     """
-    Returns a key based on consonantes only first, and then consonants and
+    Returns a key based on consonants only first, and then consonants and
     vowels together.
     """
     word = substitutions(word)
@@ -101,6 +102,7 @@ if __name__ == "__main__":
         wordlist = open(sys.argv[1])
     except IndexError:
         wordlist = sys.stdin
-
+    if six.PY2:
+        wordlist = [w.decode('UTF-8') for w in wordlist]
     for w in ivsort(wordlist):
         print(w.rstrip())
