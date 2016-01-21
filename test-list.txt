@@ -7,7 +7,7 @@
 מְלוֹא
 מָלַךְ
 מֶלֶךְ
-מָלוּךְ
+מָלוּךְ    shureq as two code points (vav+dagesh)
 מַלְכֵּי
 מְלַכִים
 מַלְכּוֹת
@@ -18,15 +18,15 @@
 מְלוּכָה
 מַלְכָּה
 מַלְכּוֹ
-מָלוּךְ
+מָלוּךְ    shureq as one code point.
 מְלוֹךְ
 מְלֹךְ
 מלוך
-שָׁבַע
-שׁוּב
-שִׂים
-שָׂבַע
-שָׁבַע
-שׁוּב
-שִׂים
-שָׂבַע
+שָׁבַע     shin as one code point
+שׁוּב     shin as one code point
+שִׂים     sin as one code point
+שָׂבַע     sin as one code point
+שָׁבַע     shin as two code points
+שׁוּב     shin as two code points
+שִׂים     sin as two code points
+שָׂבַע     sin as two code points
