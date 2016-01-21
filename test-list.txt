@@ -1,10 +1,12 @@
-מִצְוֺת
-מְצַוֶּה
+﻿מִצְוֺ֫ת
+מְצַוֶּ֔ה
 מְצֻוָּה
 מָצֶבֶת
 מָלֵא
 מְלֹא
 מְלוֹא
+מוֹלֵא
+מוֹלֵךְ
 מָלַךְ
 מֶלֶךְ
 מָלוּךְ    shureq as two code points (vav+dagesh)
@@ -30,3 +32,6 @@
 שׁוּב     shin as two code points
 שִׂים     sin as two code points
 שָׂבַע     sin as two code points
+בִּשֵּׁ֛ל     shin-dagesh as one code point
+בִּשֵּׁ֛ל     shin-dagesh as two code points
+בָּשַׁל

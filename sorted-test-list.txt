@@ -1,0 +1,37 @@
+בָּשַׁל
+בִּשֵּׁ֛ל     shin-dagesh as one code point
+בִּשֵּׁ֛ל     shin-dagesh as two code points
+מְלֹא
+מְלוֹא
+מָלֵא
+מוֹלֵא
+מלוך
+מְלֹךְ
+מְלוֹךְ
+מֶלֶךְ
+מָלַךְ
+מוֹלֵךְ
+מָלוּךְ    shureq as one code point.
+מָלוּךְ    shureq as two code points (vav+dagesh)
+מַלְכּוֹ
+מְלוּכָה
+מַלְכָּה
+מַלְכֵּי
+מְלַכִים
+מַלְכַּת
+מַלְכּוֹת
+מַלְכוּת
+מָלַכְתָּ
+מַמְלָכָה
+מָצֶבֶת
+מְצַוֶּ֔ה
+מְצֻוָּה
+﻿מִצְוֺ֫ת
+שָׂבַע     sin as one code point
+שָׂבַע     sin as two code points
+שִׂים     sin as one code point
+שִׂים     sin as two code points
+שׁוּב     shin as one code point
+שׁוּב     shin as two code points
+שָׁבַע     shin as one code point
+שָׁבַע     shin as two code points
