@@ -36,15 +36,16 @@ import re
 # If you are looking at this that some text editors "fix" the display of
 # characters for RTL languages, so some of this may be reversed for your
 # viewing pleasure.
-order = {c: i for i, c in enumerate(' אבגדהוזחטיךכלםמןנסעףפץצקרשׂשת')}
-order['־'] = order[' ']
+cons = {c: i for i, c in enumerate(' אבגדהוזחטיךכלםמןנסעףפץצקרשׂשת')}
+cons['־'] = cons[' ']
 vowels = 'םְםֱםֲםֳםִםֵםֶםַםָםֹםֺוֹםֻוּ'.replace('ם', '')
-order2 = order.copy()
+order2 = cons.copy()
 order2.update({c: 100 + i for i, c in enumerate(vowels)})
 vowels = set(vowels)
 vowdag = vowels.copy()
 vowdag.add('\u05BC')
-relevantchars = vowdag.union({'\u05C2', '\u05C1'})
+relevantchars = vowdag.union(set(cons))
+relevantchars = relevantchars.union({'\u05C2', '\u05C1'})
 trickyvavs = [(u'\u05B9ו', 'וֹ'), (u'ו\u05B9', 'וֹ'), (u'ו\u05BC', 'וּ')]
 matchsin = re.compile(u'ש([%s]{0,2})\u05C2' % ''.join(vowdag))
 
@@ -57,8 +58,8 @@ def sortkey(word):
     word = substitutions(word)
     key1, key2 = [], []
     for char in word:
-        if char in order:
-            key1.append(order[char])
+        if char in cons:
+            key1.append(cons[char])
         if char in order2:
             key2.append(order2[char])
     return (key1, key2)
