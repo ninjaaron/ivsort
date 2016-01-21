@@ -44,6 +44,7 @@ order2.update({c: 100 + i for i, c in enumerate(vowels)})
 vowels = set(vowels)
 vowdag = vowels.copy()
 vowdag.add('\u05BC')
+relevantchars = vowdag.union({'\u05C2', '\u05C1'})
 trickyvavs = [(u'\u05B9ו', 'וֹ'), (u'ו\u05B9', 'וֹ'), (u'ו\u05BC', 'וּ')]
 matchsin = re.compile(u'ש([%s]{0,2})\u05C2' % ''.join(vowdag))
 
@@ -69,6 +70,7 @@ def substitutions(word):
     recognized.
     """
     word = ud.normalize('NFD', word)
+    word = ''.join(c for c in word if c in relevantchars)
     word = matchsin.sub(u'שׂ\1', word)
     for nfd, nfc in trickyvavs:
         word = trickyvav_replacer(word, nfd, nfc)
