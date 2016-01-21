@@ -32,6 +32,7 @@ modern Hebrew.
 from __future__ import unicode_literals
 import unicodedata as ud
 import re
+import io
 import six
 # If you are looking at this that some text editors "fix" the display of
 # characters for RTL languages, so some of this may be reversed for your
@@ -103,11 +104,11 @@ def main():
     """print the output of a sort"""
     import sys
     try:
-        wordlist = open(sys.argv[1])
+        wordlist = io.open(sys.argv[1], encoding='UTF-8')
     except IndexError:
         wordlist = sys.stdin
-    if six.PY2:
-        wordlist = [w.decode('UTF-8') for w in wordlist]
+        if six.PY2:
+            wordlist = [w.decode('UTF-8') for w in wordlist]
     for word in ivsort(wordlist):
         print(word.rstrip())
 
