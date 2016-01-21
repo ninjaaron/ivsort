@@ -39,6 +39,7 @@ _________
 
 Usage
 -----
+This script requires the `six` module
 
 .At the command line
 ----

@@ -30,23 +30,23 @@ I would probably revise this approach if this sort engine were targeted at
 modern Hebrew.
 """
 from __future__ import unicode_literals
-import six
 import unicodedata as ud
 import re
+import six
 # If you are looking at this that some text editors "fix" the display of
 # characters for RTL languages, so some of this may be reversed for your
 # viewing pleasure.
-order = {c: i for i, c in enumerate(' אבגדהוזחטיךכלםמןנסעףפץצקרשׂשת')}
-order['־'] = order[' ']
-vowels = 'םְםֱםֲםֳםִםֵםֶםַםָםֹםֺוֹםֻוּ'.replace('ם', '')
-order2 = order.copy()
-order2.update({c: 100 + i for i, c in enumerate(vowels)})
-vowels = set(vowels)
-vowdag = vowels.copy()
-vowdag.add('\u05BC')
-relevantchars = vowdag.union({'\u05C2', '\u05C1'})
-trickyvavs = [(u'\u05B9ו', 'וֹ'), (u'ו\u05B9', 'וֹ'), (u'ו\u05BC', 'וּ')]
-matchsin = re.compile(u'ש([%s]{0,2})\u05C2' % ''.join(vowdag))
+ORDER = {c: i for i, c in enumerate(' אבגדהוזחטיךכלםמןנסעףפץצקרשׂשת')}
+ORDER['־'] = ORDER[' ']
+VOWELORDER = 'םְםֱםֲםֳםִםֵםֶםַםָםֹםֺוֹםֻוּ'.replace('ם', '')
+ORDER2 = ORDER.copy()
+ORDER2.update({c: 100 + i for i, c in enumerate(VOWELORDER)})
+VOWELS = set(VOWELORDER)
+VOWDAGESH = VOWELS.copy()
+VOWDAGESH.add('\u05BC')
+RELEVANTCHARS = VOWDAGESH.union({'\u05C2', '\u05C1'})
+TRICKYVAVS = [(u'\u05B9ו', 'וֹ'), (u'ו\u05B9', 'וֹ'), (u'ו\u05BC', 'וּ')]
+MATCHSIN = re.compile(u'ש([%s]{0,2})\u05C2' % ''.join(VOWDAGESH))
 
 
 def sortkey(word):
@@ -57,10 +57,10 @@ def sortkey(word):
     word = substitutions(word)
     key1, key2 = [], []
     for char in word:
-        if char in order:
-            key1.append(order[char])
-        if char in order2:
-            key2.append(order2[char])
+        if char in ORDER:
+            key1.append(ORDER[char])
+        if char in ORDER2:
+            key2.append(ORDER2[char])
     return (key1, key2)
 
 
@@ -70,9 +70,9 @@ def substitutions(word):
     recognized.
     """
     word = ud.normalize('NFD', word)
-    word = ''.join(c for c in word if c in relevantchars)
-    word = matchsin.sub(u'שׂ\1', word)
-    for nfd, nfc in trickyvavs:
+    word = ''.join(c for c in word if c in RELEVANTCHARS)
+    word = MATCHSIN.sub(u'שׂ\1', word)
+    for nfd, nfc in TRICKYVAVS:
         word = trickyvav_replacer(word, nfd, nfc)
     return word
 
@@ -85,7 +85,7 @@ def trickyvav_replacer(word, nfd, nfc):
     check = word.find(nfd)
     i = check
     while check != -1:
-        if not (word[i+2:i+1] in vowdag or word[i-1:i] in vowels):
+        if not (word[i+2:i+1] in VOWDAGESH or word[i-1:i] in VOWELS):
             word = word.replace(nfd, nfc, 1)
         start = i + 1
         check = word[start:].find(nfd)
@@ -98,7 +98,8 @@ def ivsort(wordlist):
     return sorted(wordlist, key=sortkey)
 
 
-if __name__ == "__main__":
+def main():
+    """print the output of a sort"""
     import sys
     try:
         wordlist = open(sys.argv[1])
@@ -106,5 +107,9 @@ if __name__ == "__main__":
         wordlist = sys.stdin
     if six.PY2:
         wordlist = [w.decode('UTF-8') for w in wordlist]
-    for w in ivsort(wordlist):
-        print(w.rstrip())
+    for word in ivsort(wordlist):
+        print(word.rstrip())
+
+
+if __name__ == "__main__":
+    main()
