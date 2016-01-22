@@ -1,6 +1,6 @@
-בָּשַׁל
 בִּשֵּׁ֛ל     shin-dagesh as one code point
 בִּשֵּׁ֛ל     shin-dagesh as two code points
+בָּשַׁל
 מְלֹא
 מְלוֹא
 מָלֵא
@@ -10,9 +10,9 @@
 מְלוֹךְ
 מֶלֶךְ
 מָלַךְ
-מוֹלֵךְ
-מָלוּךְ    shureq as one code point.
 מָלוּךְ    shureq as two code points (vav+dagesh)
+מָלוּךְ    shureq as one code point.
+מוֹלֵךְ
 מַלְכּוֹ
 מְלוּכָה
 מַלְכָּה
