@@ -45,7 +45,7 @@ VOWELS = set(VOWELORDER)
 VOWDAGESH = VOWELS.copy()
 VOWDAGESH.add('\u05BC')
 RELEVANTCHARS = VOWDAGESH.union(set(CONS))
-RELEVANTCHARS = RELEVANTCHARS.union({'\u05C2', '\u05C1'})
+RELEVANTCHARS.add('\u05C2')
 TRICKYVAVS = [(u'\u05B9ו', 'וֹ'), (u'ו\u05B9', 'וֹ'), (u'ו\u05BC', 'וּ')]
 MATCHSIN = re.compile(u'ש([%s]{0,2})\u05C2' % ''.join(VOWDAGESH))
 
