@@ -36,8 +36,8 @@ import six
 # If you are looking at this that some text editors "fix" the display of
 # characters for RTL languages, so some of this may be reversed for your
 # viewing pleasure.
-CONS = {c: i for i, c in enumerate('אבגדהוזחטיךכלםמןנסעףפץצקרשׂשת')}
-# CONS['־'] = CONS[' ']
+CONS = {c: i for i, c in enumerate(' אבגדהוזחטיךכלםמןנסעףפץצקרשׂשת')}
+CONS['־'] = CONS[' ']
 VOWELORDER = 'םְםֱםֲםֳםִםֵםֶםַםָםֹםֺוֹםֻוּ'.replace('ם', '')
 ORDER2 = CONS.copy()
 ORDER2.update({c: 100 + i for i, c in enumerate(VOWELORDER)})
