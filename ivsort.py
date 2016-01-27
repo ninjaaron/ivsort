@@ -36,8 +36,7 @@ import six
 # If you are looking at this that some text editors "fix" the display of
 # characters for RTL languages, so some of this may be reversed for your
 # viewing pleasure.
-CONS = {c: i for i, c in enumerate(' אבגדהוזחטיךכלםמןנסעףפץצקרשׂשת')}
-CONS['־'] = CONS[' ']
+CONS = {c: i for i, c in enumerate('אבגדהוזחטיךכלםמןנסעףפץצקרשׂשׁת')}
 VOWELORDER = 'םְםֱםֲםֳםִםֵםֶםַםָםֹםֺוֹםֻוּ'.replace('ם', '')
 ORDER2 = CONS.copy()
 ORDER2.update({c: 100 + i for i, c in enumerate(VOWELORDER)})
@@ -45,9 +44,8 @@ VOWELS = set(VOWELORDER)
 VOWDAGESH = VOWELS.copy()
 VOWDAGESH.add('\u05BC')
 RELEVANTCHARS = VOWDAGESH.union(set(CONS))
-RELEVANTCHARS.add('\u05C2')
+RELEVANTCHARS = RELEVANTCHARS.union({'\u05C2', ' ', '־'})
 TRICKYVAVS = [(u'\u05B9ו', 'וֹ'), (u'ו\u05B9', 'וֹ'), (u'ו\u05BC', 'וּ')]
-MATCHSIN = re.compile(u'ש([%s]{0,2})\u05C2' % ''.join(VOWDAGESH))
 
 
 def sortkey(word):
@@ -56,13 +54,17 @@ def sortkey(word):
     vowels together.
     """
     word = substitutions(word)
-    key1, key2 = [], []
+    key, key1, key2 = [], [], []
     for char in word:
+        if char in ' ־':
+            key = key + key1 + key2 + [0]
+            key1, key2 = [], []
         if char in CONS:
             key1.append(CONS[char])
         if char in ORDER2:
             key2.append(ORDER2[char])
-    return (key1, key2)
+    key = key + key1 + key2
+    return key
 
 
 def substitutions(word):
@@ -72,9 +74,26 @@ def substitutions(word):
     """
     word = ud.normalize('NFD', word)
     word = ''.join(c for c in word if c in RELEVANTCHARS)
-    word = MATCHSIN.sub(u'שׂ\1', word)
+    word = sinner(word)
     for nfd, nfc in TRICKYVAVS:
         word = trickyvav_replacer(word, nfd, nfc)
+    return word
+
+
+def sinner(word):
+    print(word)
+    shin = word.find('ש')
+    print(shin)
+    while shin != -1:
+        sindot = word.find('\u05C2')
+        for char in word[shin:sindot]:
+            if char in CONS or sindot == -1:
+                word = word.replace(u'ש', u'שׁ', l)
+                break
+            else:
+                word = word.replace(u'ש', u'שׂ', l)
+                break
+        shin = word.find(u'ש')
     return word
 
 
@@ -108,8 +127,9 @@ def main():
         wordlist = sys.stdin
     if six.PY2:
         wordlist = [w.decode('UTF-8') for w in wordlist]
-    for word in ivsort(wordlist):
-        print(word.rstrip())
+#    for word in ivsort(wordlist):
+#        print(word.rstrip())
+    ivsort(wordlist)
 
 
 if __name__ == "__main__":
