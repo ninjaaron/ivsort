@@ -44,7 +44,7 @@ VOWELS = set(VOWELORDER)
 VOWDAGESH = VOWELS.copy()
 VOWDAGESH.add('\u05BC')
 RELEVANTCHARS = VOWDAGESH.union(set(CONS))
-RELEVANTCHARS = RELEVANTCHARS.union({'\u05C2', ' ', '־'})
+RELEVANTCHARS = RELEVANTCHARS.union({'ש', '\u05C2', ' ', '־'})
 TRICKYVAVS = [(u'\u05B9ו', 'וֹ'), (u'ו\u05B9', 'וֹ'), (u'ו\u05BC', 'וּ')]
 
 
@@ -81,17 +81,15 @@ def substitutions(word):
 
 
 def sinner(word):
-    print(word)
     shin = word.find('ש')
-    print(shin)
     while shin != -1:
         sindot = word.find('\u05C2')
         for char in word[shin:sindot]:
             if char in CONS or sindot == -1:
-                word = word.replace(u'ש', u'שׁ', l)
+                word = word.replace(u'ש', u'שׁ', 1)
                 break
             else:
-                word = word.replace(u'ש', u'שׂ', l)
+                word = word.replace(u'ש', u'שׂ', 1)
                 break
         shin = word.find(u'ש')
     return word
@@ -127,9 +125,8 @@ def main():
         wordlist = sys.stdin
     if six.PY2:
         wordlist = [w.decode('UTF-8') for w in wordlist]
-#    for word in ivsort(wordlist):
-#        print(word.rstrip())
-    ivsort(wordlist)
+    for word in ivsort(wordlist):
+        print(word.rstrip())
 
 
 if __name__ == "__main__":
