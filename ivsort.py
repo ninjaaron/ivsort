@@ -36,7 +36,7 @@ import six
 # If you are looking at this that some text editors "fix" the display of
 # characters for RTL languages, so some of this may be reversed for your
 # viewing pleasure.
-CONS = {c: i for i, c in enumerate('אבגדהוזחטיךכלםמןנסעףפץצקרשׂשׁת')}
+CONS = {c: i+1  for i, c in enumerate('אבגדהוזחטיךכלםמןנסעףפץצקרשׂשׁת')}
 VOWELORDER = 'םְםֱםֲםֳםִםֵםֶםַםָםֹםֺוֹםֻוּ'.replace('ם', '')
 ORDER2 = CONS.copy()
 ORDER2.update({c: 100 + i for i, c in enumerate(VOWELORDER)})
@@ -57,13 +57,17 @@ def sortkey(word):
     key, key1, key2 = [], [], []
     for char in word:
         if char in ' ־':
-            key = key + key1 + key2 + [0]
+            key.append(key1)
+            key.append(key2)
+            key.append([0])
             key1, key2 = [], []
         if char in CONS:
             key1.append(CONS[char])
         if char in ORDER2:
             key2.append(ORDER2[char])
-    key = key + key1 + key2
+    key.append(key1)
+    key.append(key2)
+    key.append([0])
     return key
 
 

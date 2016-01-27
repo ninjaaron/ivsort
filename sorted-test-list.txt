@@ -10,8 +10,8 @@
 מְלוֹךְ
 מֶלֶךְ
 מָלַךְ
-מָלוּךְ    shureq as two code points (vav+dagesh)
 מָלוּךְ    shureq as one code point.
+מָלוּךְ    shureq as two code points (vav+dagesh)
 מוֹלֵךְ
 מַלְכּוֹ
 מְלוּכָה
