@@ -85,6 +85,7 @@ def substitutions(word):
 
 
 def sinner(word):
+    """replaced all decomposed sins with composed sins. Same for shin."""
     shin = word.find('ש')
     while shin != -1:
         sindot = word.find('\u05C2')
@@ -104,14 +105,14 @@ def trickyvav_replacer(word, nfd, nfc):
     Certain vavs make it difficult to tell if they are consonants or vowels,
     This function makes sure.
     """
-    check = word.find(nfd)
-    i = check
-    while check != -1:
+    vav = word.find(nfd)
+    i = vav
+    while vav != -1:
         if not (word[i+2:i+1] in VOWDAGESH or word[i-1:i] in VOWELS):
             word = word.replace(nfd, nfc, 1)
         start = i + 1
-        check = word[start:].find(nfd)
-        i = check + start
+        vav = word[start:].find(nfd)
+        i = vav + start
     return word
 
 
