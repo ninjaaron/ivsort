@@ -130,7 +130,3 @@ def main():
         wordlist = [w.decode('UTF-8') for w in wordlist]
     for word in ivsort(wordlist):
         print(word.rstrip())
-
-
-if __name__ == "__main__":
-    main()
