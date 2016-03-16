@@ -88,7 +88,9 @@ def sinner(word):
     """replaced all decomposed sins with composed sins. Same for shin."""
     shin = word.find('ש')
     while shin != -1:
-        sindot = word.find('\u05C2')
+        sindot = word[shin:].find('\u05C2')
+        if sindot != -1:
+            sindot = shin + sindot
         for char in word[shin:sindot]:
             if char in CONS or sindot == -1:
                 word = word.replace(u'ש', u'שׁ', 1)
