@@ -33,9 +33,8 @@ from __future__ import unicode_literals
 import unicodedata as ud
 import re
 import six
-# If you are looking at this that some text editors "fix" the display of
-# characters for RTL languages, so some of this may be reversed for your
-# viewing pleasure.
+# most text editors "fix" the display of characters for RTL languages, so some
+# of this may be reversed for your viewing pleasure.
 CONS = {c: i+1  for i, c in enumerate('אבגדהוזחטיךכלםמןנסעףפץצקרשׂשׁת')}
 VOWELORDER = 'םְםֱםֲםֳםִםֵםֶםַםָםֹםֺוֹםֻוּ'.replace('ם', '')
 ORDER2 = CONS.copy()
@@ -126,10 +125,7 @@ def ivsort(wordlist):
 def main():
     """print the output of a sort"""
     import sys
-    try:
-        wordlist = open(sys.argv[1])
-    except IndexError:
-        wordlist = sys.stdin
+    wordlist = open(sys.argv[1]) if sys.argv[1:] else sys.stdin
     if six.PY2:
         wordlist = [w.decode('UTF-8') for w in wordlist]
     for word in ivsort(wordlist):
