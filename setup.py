@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='ivsort',
-    version='0.1',
+    version='0.2',
     description='proper sorting of pointed Hebrew texts',
     long_description=open('README.rst').read(),
     url='https://github.com/ninjaaron/ivsort',

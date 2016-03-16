@@ -41,15 +41,17 @@ Usage
 -----
 
 At the command line::
-    $ cat wordlist.txt | ivsort.py
+
+    $ cat wordlist.txt | ivsort
     ...
-    $ ivsort.py wordlist.txt
+    $ ivsort wordlist.txt
 
 So it can read from a file or from STDIN, so as to be useful for text
 editors that can use shell commands as filters (like all of them that
 matter). It is basically how `sort` works.
 
 As a Python3 module::
+
     from ivsort import ivsort
     sorted_list = ivsort(unsorted_iterable)
 
